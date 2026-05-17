@@ -10,6 +10,7 @@ const Header = () => {
     <header className="site-header">
       <a className="brand-mark" href="#top" aria-label="Salvin CRM home" onClick={closeMenu}>
         <img src={SalvinLogo} alt="Salvin CRM" />
+        <h1>check</h1>
         <span>
           <strong>Salvin</strong>
           <small>CRM Cloud</small>
