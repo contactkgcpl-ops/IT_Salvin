@@ -1,27 +1,40 @@
 import heroAsset from '../../assets/hero.png'
+import SalvinLogo from '../../assets/salvin_logo.jpeg'
 
 const Hero = () => {
   return (
     <section className="hero-section" id="top">
       <div className="hero-copy">
-        <p className="eyebrow">Sales, service, and customer CRM</p>
-        <h1>Run every lead, deal, ticket, and follow-up from one CRM cockpit.</h1>
+        <p className="eyebrow">Modern CRM for growth teams</p>
+        <h1>Turn every enquiry into a tracked, automated customer journey.</h1>
         <p className="hero-lede">
-          Salvin CRM gives teams a clear command center for enquiry capture, customer history,
-          sales pipeline, quotations, field visits, service tickets, and ERP-ready reporting.
+          Salvin CRM brings leads, quotations, visits, service tickets, analytics, and ERP-ready
+          handoffs into one elegant workspace built for fast-moving teams.
         </p>
         <div className="hero-actions">
           <a className="primary-button" href="#modules">
-            Explore Modules
+            Explore CRM
           </a>
           <a className="secondary-button" href="#pipeline">
-            View Pipeline
+            Watch Flow
           </a>
+        </div>
+        <div className="hero-trust" aria-label="CRM highlights">
+          <span>AI-ready workflows</span>
+          <span>Mobile sales teams</span>
+          <span>ERP context</span>
         </div>
       </div>
 
       <div className="hero-visual" aria-label="Salvin CRM dashboard preview">
         <img className="hero-orbit" src={heroAsset} alt="" />
+        <div className="floating-chip chip-one">+37 leads</div>
+        <div className="floating-chip chip-two">Quote approved</div>
+        <div className="orbital-cube" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
         <div className="crm-console">
           <div className="console-topbar">
             <strong>Salvin CRM workspace</strong>
@@ -58,6 +71,12 @@ const Hero = () => {
                 <div className="console-card">
                   <small>Open pipeline</small>
                   <strong>Rs 1.54Cr</strong>
+                  <div className="mini-bars" aria-hidden="true">
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                  </div>
                 </div>
                 <div className="console-card dark-card">
                   <small>Won this month</small>

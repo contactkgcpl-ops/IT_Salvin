@@ -1,4 +1,4 @@
-export const navItems = ['Overview', 'Modules', 'Pipeline', 'Automation', 'Reports']
+export const navItems = ['Overview', 'Modules', 'Pipeline', 'Automation', 'Integrations', 'Reports']
 
 export const metrics = [
   { value: '42%', label: 'Faster lead response', detail: 'Instant capture and routed follow-up' },
@@ -38,6 +38,12 @@ export const modules = [
     tag: 'ERP ready',
     copy: 'Connect CRM activity with invoices, receivables, purchase status, inventory, and payment follow-up.',
   },
+]
+
+export const workflowSteps = [
+  { label: 'Capture', detail: 'Web, call, WhatsApp, field visit, and partner enquiries enter one clean queue.' },
+  { label: 'Qualify', detail: 'Rules assign owners, detect duplicates, set SLA timers, and create next actions.' },
+  { label: 'Close', detail: 'Quote approval, order handoff, invoice context, and service follow-up stay connected.' },
 ]
 
 export const pipeline = [
@@ -81,6 +87,30 @@ export const industries = [
   'Automotive',
   'Field service',
   'MSME growth teams',
+]
+
+export const integrations = [
+  'WhatsApp',
+  'Email',
+  'Tally',
+  'Business Central',
+  'Google Sheets',
+  'Power BI',
+  'Website forms',
+  'Telephony',
+]
+
+export const testimonials = [
+  {
+    quote: 'Salvin CRM gives our team one view of every enquiry, quote, and follow-up. Managers finally see the movement before deals go cold.',
+    name: 'Sales Head',
+    company: 'Industrial distribution team',
+  },
+  {
+    quote: 'Service requests, visits, and customer history now sit beside sales activity. It feels less like data entry and more like control.',
+    name: 'Operations Manager',
+    company: 'Equipment service business',
+  },
 ]
 
 export const reportRows = [

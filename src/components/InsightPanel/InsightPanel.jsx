@@ -1,10 +1,10 @@
-import { reportRows } from '../../data/crmData.js'
+import { reportRows, testimonials } from '../../data/crmData.js'
 
 const InsightPanel = () => {
   return (
     <section className="insight-section" id="reports">
       <div className="section-heading">
-        <p className="eyebrow">Decision reports</p>
+        <p className="eyebrow">Analytics and proof</p>
         <h2>Know what changed before month-end meetings begin.</h2>
       </div>
       <div className="insight-layout">
@@ -27,6 +27,15 @@ const InsightPanel = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="testimonial-grid">
+        {testimonials.map((item) => (
+          <article className="testimonial-card" key={item.name}>
+            <p>{item.quote}</p>
+            <strong>{item.name}</strong>
+            <span>{item.company}</span>
+          </article>
+        ))}
       </div>
     </section>
   )

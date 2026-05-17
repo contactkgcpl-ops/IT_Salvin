@@ -4,8 +4,8 @@ const ModuleGrid = () => {
   return (
     <section className="section-block" id="modules">
       <div className="section-heading">
-        <p className="eyebrow">Component stack</p>
-        <h2>CRM modules shaped around sales, service, and ERP handoff.</h2>
+        <p className="eyebrow">CRM modules</p>
+        <h2>Everything your team needs to capture, convert, and retain customers.</h2>
       </div>
       <div className="module-grid">
         {modules.map((module, index) => (

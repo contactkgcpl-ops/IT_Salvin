@@ -10,7 +10,6 @@ const Header = () => {
     <header className="site-header">
       <a className="brand-mark" href="#top" aria-label="Salvin CRM home" onClick={closeMenu}>
         <img src={SalvinLogo} alt="Salvin CRM" />
-        <h1>check</h1>
         <span>
           <strong>Salvin</strong>
           <small>CRM Cloud</small>
@@ -36,7 +35,7 @@ const Header = () => {
         aria-label="Primary navigation"
       >
         {navItems.map((item) => (
-          <a href={item === 'Overview' ? '#top' : `#${item.toLowerCase()}`} key={item} onClick={closeMenu}>
+          <a href={item === 'Overview' ? '#overview' : `#${item.toLowerCase()}`} key={item} onClick={closeMenu}>
             {item}
           </a>
         ))}
