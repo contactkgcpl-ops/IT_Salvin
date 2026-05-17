@@ -32,4 +32,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./dist/
-          server-dir: /home/u757980258/domains/app.kgcpl.com/public_html/
+          # server-dir: /home/u757980258/domains/app.kgcpl.com/public_html/
+          server-dir: ./
