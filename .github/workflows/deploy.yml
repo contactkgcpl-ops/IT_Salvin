@@ -29,6 +29,7 @@ jobs:
         with:
           server: ftp.app.kgcpl.com
           username: u757980258.salvinit
-          password: ${{ secrets.Salvinit09 }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
           local-dir: ./dist/
           server-dir: /home/u757980258/domains/app.kgcpl.com/public_html/
