@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -29,7 +29,7 @@ jobs:
         with:
           server: ftp.app.kgcpl.com
           username: u757980258.salvinit
-          password: ${{ secrets.FTP_PASSWORD }}
+          password: ${{ secrets.Salvinit09 }}
           port: 21
           local-dir: ./dist/
           # server-dir: /home/u757980258/domains/app.kgcpl.com/public_html/
