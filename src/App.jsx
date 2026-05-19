@@ -1,122 +1,189 @@
+import { AnimatePresence, motion } from 'framer-motion'
+import {
+  ArrowRight,
+  BarChart3,
+  Boxes,
+  CheckCircle2,
+  ChevronDown,
+  Clock3,
+  CloudCog,
+  Code2,
+  DatabaseZap,
+  Factory,
+  Gauge,
+  Headphones,
+  Layers3,
+  Mail,
+  MapPin,
+  Menu,
+  Phone,
+  Rocket,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  UsersRound,
+  Workflow,
+  X,
+} from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import SalvinLogo from './assets/salvin_logo.jpeg'
 
-const pages = ['Home', 'Services', 'About', 'Portfolio', 'Contact']
+const navItems = ['Home', 'Projects', 'Contact Us']
 
-const industries = [
-  {
-    id: 'food',
-    icon: 'F&B',
-    title: 'Food & Beverages',
-    heading: 'From farm to premium table',
-    copy: 'End-to-end supply chains, distribution networks, and premium brand development for hospitality, modern retail, and institutional clients.',
-    tags: ['Supply chain', 'Brand development', 'FSSAI compliance', 'Cold chain', 'HORECA'],
-  },
-  {
-    id: 'hospitality',
-    icon: 'HOT',
-    title: 'Hospitality',
-    heading: 'World-class guest experiences',
-    copy: 'Hotel management, resort development, operations consulting, revenue management, and staff training for stronger guest outcomes.',
-    tags: ['Hotel management', 'Resorts', 'Revenue ops', 'F&B operations', 'Training'],
-  },
-  {
-    id: 'events',
-    icon: 'EVT',
-    title: 'Events & Exhibition',
-    heading: 'Unforgettable brand moments',
-    copy: 'End-to-end event management and exhibition design for trade shows, corporate launches, and high-visibility brand experiences.',
-    tags: ['Trade shows', 'Corporate events', 'Exhibition design', 'Event tech', 'Logistics'],
-  },
-  {
-    id: 'trading',
-    icon: 'TRD',
-    title: 'Trading',
-    heading: 'Global commodity intelligence',
-    copy: 'International commodity trading, procurement, negotiations, import and export compliance, and transparent market connections.',
-    tags: ['Commodity trading', 'Import/export', 'Procurement', 'Trade finance', 'Risk'],
-  },
-  {
-    id: 'pharma',
-    icon: 'PHR',
-    title: 'Pharmaceutical',
-    heading: 'Healthcare supply precision',
-    copy: 'Compliant pharmaceutical distribution, cold chain logistics, API sourcing, and healthcare supply solutions.',
-    tags: ['Drug distribution', 'Cold chain', 'GMP', 'Regulatory', 'Exports'],
-  },
-  {
-    id: 'chemical',
-    icon: 'CHM',
-    title: 'Chemical',
-    heading: 'Specialty chemical solutions',
-    copy: 'Specialty chemical procurement, safe storage, compliant delivery, and bulk supply for pharma, agriculture, manufacturing, and textiles.',
-    tags: ['Specialty chemicals', 'Safe handling', 'REACH', 'Reagents', 'Bulk procurement'],
-  },
-  {
-    id: 'engineering',
-    icon: 'ENG',
-    title: 'Engineering',
-    heading: 'Industrial infrastructure built to last',
-    copy: 'Industrial plant setup, MEP contracting, automation, infrastructure development, and mechanical project execution.',
-    tags: ['Plant engineering', 'MEP', 'Automation', 'Turnkey', 'Maintenance'],
-  },
-  {
-    id: 'realestate',
-    icon: 'EST',
-    title: 'Real Estate',
-    heading: 'Premium property development',
-    copy: 'Residential townships, commercial complexes, industrial parks, investment advisory, and transparent project governance.',
-    tags: ['Residential', 'Commercial', 'Industrial parks', 'RERA', 'Advisory'],
-  },
-  {
-    id: 'manufacturing',
-    icon: 'MFG',
-    title: 'Manufacturing & Retail',
-    heading: 'From factory floor to consumer hands',
-    copy: 'Integrated manufacturing units, private label programs, warehousing, and retail distribution networks.',
-    tags: ['Contract manufacturing', 'Retail', 'OEM', 'Warehousing', 'Modern trade'],
-  },
+const services = [
+  ['ERP Implementation', 'Finance, inventory, procurement, production, HR, and compliance systems built around real operations.', Boxes],
+  ['CRM & Sales Automation', 'Lead routing, pipeline governance, customer service, renewals, and partner workflows that increase conversion.', UsersRound],
+  ['Dashboards & Analytics', 'Executive KPIs, role-based BI, forecasting, and actionable reporting connected to your live business data.', BarChart3],
+  ['Workflow Automation', 'Approval chains, alerts, document flows, integrations, and exception handling that remove manual bottlenecks.', Workflow],
+  ['Custom Software', 'Modern web portals, mobile apps, APIs, and internal platforms designed for scale, security, and adoption.', Code2],
+  ['Cloud & Integrations', 'Secure cloud deployments, third-party integrations, data migration, and long-term managed support.', CloudCog],
 ]
 
-const stats = [
-  ['15+', 'Years of excellence'],
-  ['10+', 'Industry verticals'],
-  ['500+', 'Projects delivered'],
-  ['98%', 'Client satisfaction'],
+const industries = ['Manufacturing', 'Retail & Distribution', 'Real Estate', 'Healthcare', 'Education', 'Logistics', 'Professional Services', 'Hospitality']
+
+const modules = [
+  ['Finance', 'Ledger, receivables, payables, GST, approvals'],
+  ['Inventory', 'Warehouses, batches, reorder, barcode flows'],
+  ['Sales CRM', 'Leads, deals, quotes, follow-ups, renewals'],
+  ['Projects', 'Milestones, billing, resources, profitability'],
+  ['HRMS', 'Attendance, payroll, leave, performance'],
+  ['Service Desk', 'Tickets, SLA, escalation, customer portal'],
+  ['Production', 'BOM, work orders, quality, maintenance'],
+  ['BI Analytics', 'KPI dashboards, alerts, forecasting, exports'],
 ]
 
-const timeline = [
-  ['2009', 'The Beginning', 'Founded in Ahmedabad with a focused commodity trading operation and a determined team.'],
-  ['2012', 'Engineering & Manufacturing', 'Expanded into industrial engineering and contract manufacturing for private and public sector clients.'],
-  ['2015', 'Hospitality Division', 'Launched hospitality management and resort development partnerships across western India.'],
-  ['2018', 'Pharma & Chemical', 'Entered regulated pharmaceutical and specialty chemical markets with compliant operating systems.'],
-  ['2021', 'Real Estate & Retail', 'Started RERA-aligned development and expanded retail touchpoints across priority markets.'],
-  ['2025', 'Conglomerate Platform', 'Operating 10+ business units with multi-sector execution capability and a growing national footprint.'],
+const process = [
+  ['01', 'Discover', 'Map business goals, users, workflows, pain points, integrations, and reporting expectations.'],
+  ['02', 'Design', 'Create architecture, wireframes, module scope, data model, migration plan, and delivery roadmap.'],
+  ['03', 'Build', 'Develop in sprints with demos, test automation, security checks, and stakeholder feedback.'],
+  ['04', 'Launch', 'Migrate data, train teams, deploy securely, monitor adoption, and improve continuously.'],
 ]
 
-const projects = [
-  ['realestate', 'Skyline Commercial Complex', '2.5 lakh sq ft commercial development in Ahmedabad with strong launch occupancy.'],
-  ['hospitality', 'The Marquee Boutique Hotel', 'Operations overhaul improving revenue performance and guest satisfaction.'],
-  ['engineering', 'Industrial Plant Setup', 'Turnkey engineering project for a textile manufacturer with MEP and automation.'],
-  ['pharma', 'MedServe Supply Chain', 'Pharmaceutical procurement redesign reducing cost while improving delivery accuracy.'],
-  ['events', 'Vibrant Gujarat Exhibition', 'Corporate exhibition booth design and management for a flagship investment summit.'],
-  ['realestate', 'Green Valley Residences', 'Residential township delivered ahead of schedule with clean handover systems.'],
-  ['engineering', 'GMP Facility Upgrade', 'Engineering overhaul of a pharma facility for export-grade compliance.'],
-  ['hospitality', 'Resort F&B Launch', 'Five-outlet F&B ecosystem for a resort with stronger revenue contribution.'],
-  ['events', 'Industry Conference', 'End-to-end event management for a national conference with exhibitors and broadcast.'],
+const techStack = ['React', 'Node.js', 'Laravel', 'Python', 'PostgreSQL', 'SQL Server', 'Power BI', 'AWS', 'Azure', 'Docker', 'REST APIs', 'Microsoft 365']
+
+const benefits = [
+  ['35%', 'faster approvals'],
+  ['24/7', 'real-time visibility'],
+  ['50%', 'less manual reporting'],
+  ['99.9%', 'cloud-ready uptime'],
 ]
 
 const testimonials = [
-  ['Rajesh Kumar', 'Director, Apex Infrastructure', 'Salvin delivered our commercial complex on time with exceptional project governance.'],
-  ['Sneha Patel', 'COO, MedServe India', 'Their pharmaceutical supply chain team reduced procurement cost while improving delivery discipline.'],
-  ['Arjun Mehta', 'Owner, The Marquee Hotels', 'The hospitality consulting team transformed operations and guest satisfaction scores.'],
+  ['Operations Director', 'Manufacturing Group', 'Their ERP team understood our shop-floor reality and gave leadership clear visibility without slowing production.'],
+  ['Founder', 'B2B Distribution Startup', 'We replaced spreadsheets with a CRM and order workflow our sales team actually uses every day.'],
+  ['CFO', 'Multi-Branch Services Firm', 'Dashboards, approvals, and billing controls helped us scale with fewer operational surprises.'],
 ]
+
+const faqs = [
+  ['Can you customize ERP and CRM around our process?', 'Yes. We design around your workflows first, then configure or build modules where standard software cannot support the business.'],
+  ['Do you migrate data from spreadsheets or old software?', 'Yes. We clean, map, validate, import, and reconcile legacy data so teams can move without losing business context.'],
+  ['Can you integrate accounting, WhatsApp, email, or payment tools?', 'Yes. We build secure APIs and connectors for finance, communication, payments, BI, and industry-specific systems.'],
+  ['Do you provide support after launch?', 'Yes. We provide training, managed support, monitoring, enhancement sprints, and adoption reviews after go-live.'],
+]
+
+const heroModules = [
+  {
+    icon: BarChart3,
+    title: 'Finance & Accounting',
+    sub: 'Ledger / GST / Reports',
+    desc: 'Real-time P&L, automated GST filings, bank reconciliation, and multi-branch consolidation - all in one place.',
+    pills: ['GST / TDS filing', 'Multi-currency', 'Auto reconciliation', 'Custom reports'],
+  },
+  {
+    icon: UsersRound,
+    title: 'CRM & Sales',
+    sub: 'Leads / Pipeline / Follow-ups',
+    desc: 'Track every lead from first touch to closed deal. Automate follow-ups, set reminders, and never let a hot deal go cold.',
+    pills: ['Lead scoring', 'Pipeline view', 'Email sequences', 'Sales analytics'],
+  },
+  {
+    icon: Boxes,
+    title: 'Inventory',
+    sub: 'Stock / Purchase / Orders',
+    desc: 'Live stock levels, auto purchase orders, and vendor management - eliminate manual counting and stockouts forever.',
+    pills: ['Low-stock alerts', 'Multi-warehouse', 'Purchase orders', 'Batch tracking'],
+  },
+  {
+    icon: Workflow,
+    title: 'Workflow Automation',
+    sub: 'Approvals / Alerts / Tasks',
+    desc: 'Route approvals, trigger alerts, and assign tasks automatically. Your team focuses on work that matters, not admin.',
+    pills: ['Approval chains', 'Auto notifications', 'SLA tracking', 'Custom triggers'],
+  },
+  {
+    icon: Headphones,
+    title: 'HR & Payroll',
+    sub: 'Attendance / Salary / ESS',
+    desc: 'Attendance, leave, and salary in one system. Run compliant payroll in minutes with ESS portal for employees.',
+    pills: ['Attendance sync', 'Salary slips', 'Leave management', 'Compliance reports'],
+  },
+  {
+    icon: Gauge,
+    title: 'Analytics & BI',
+    sub: 'Dashboards / KPIs / Drill-down',
+    desc: 'Pre-built and custom dashboards that surface the numbers your leadership needs - updated in real time.',
+    pills: ['Live dashboards', 'Drill-down reports', 'KPI tracking', 'Export to Excel'],
+  },
+]
+
+const projects = [
+  {
+    category: 'ERP',
+    title: 'Manufacturing ERP Command Center',
+    industry: 'Manufacturing',
+    copy: 'Production planning, inventory, purchase approvals, quality checks, and live profitability dashboard for a multi-unit plant.',
+    stack: ['React', 'Node.js', 'PostgreSQL', 'Power BI'],
+    metric: '28% lower stock-outs',
+  },
+  {
+    category: 'CRM',
+    title: 'B2B Sales CRM & Partner Portal',
+    industry: 'Distribution',
+    copy: 'Lead capture, quote approvals, distributor pricing, renewal reminders, and mobile-ready sales dashboards.',
+    stack: ['React', 'Laravel', 'MySQL', 'WhatsApp API'],
+    metric: '41% faster follow-ups',
+  },
+  {
+    category: 'Analytics',
+    title: 'Executive KPI Analytics Suite',
+    industry: 'Services',
+    copy: 'Role-based dashboards for revenue, utilization, cashflow, branch performance, and SLA health.',
+    stack: ['Power BI', 'SQL Server', 'Azure', 'ETL'],
+    metric: '12 live board reports',
+  },
+  {
+    category: 'Workflow',
+    title: 'Procurement Approval Automation',
+    industry: 'Healthcare',
+    copy: 'Vendor onboarding, purchase requests, budget checks, GRN matching, and audit-friendly approval trails.',
+    stack: ['React', 'Python', 'PostgreSQL', 'Email API'],
+    metric: '35% shorter cycle',
+  },
+  {
+    category: 'ERP',
+    title: 'Real Estate Project ERP',
+    industry: 'Real Estate',
+    copy: 'Booking, collections, construction milestones, vendor bills, document vault, and customer communication.',
+    stack: ['React', 'Node.js', 'AWS', 'Razorpay'],
+    metric: '360 degree project view',
+  },
+  {
+    category: 'CRM',
+    title: 'Customer Service Desk CRM',
+    industry: 'SaaS',
+    copy: 'Ticket SLA, escalation matrix, knowledge base, customer portal, renewal workflow, and support analytics.',
+    stack: ['React', 'Firebase', 'Cloud Functions', 'Looker'],
+    metric: '64% SLA improvement',
+  },
+]
+
+const projectFilters = ['All', 'ERP', 'CRM', 'Analytics', 'Workflow']
 
 function App() {
   const [page, setPage] = useState('Home')
   const [menuOpen, setMenuOpen] = useState(false)
-  const [filter, setFilter] = useState('all')
+  const [filter, setFilter] = useState('All')
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
@@ -124,58 +191,74 @@ function App() {
   }, [page])
 
   useEffect(() => {
-    const onScroll = () => document.body.classList.toggle('is-scrolled', window.scrollY > 20)
+    const onScroll = () => document.body.classList.toggle('is-scrolled', window.scrollY > 12)
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const visibleProjects = useMemo(
-    () => projects.filter(([cat]) => filter === 'all' || cat === filter),
+  const shownProjects = useMemo(
+    () => projects.filter((project) => filter === 'All' || project.category === filter),
     [filter],
   )
 
   const navigate = (nextPage) => {
     setPage(nextPage)
     setMenuOpen(false)
-    setFilter('all')
     setSubmitted(false)
+    if (nextPage !== 'Projects') setFilter('All')
   }
 
   return (
-    <div className="site-shell">
-      <Header page={page} menuOpen={menuOpen} setMenuOpen={setMenuOpen} navigate={navigate} />
-      <main>
-        {page === 'Home' && <HomePage navigate={navigate} />}
-        {page === 'Services' && <ServicesPage navigate={navigate} />}
-        {page === 'About' && <AboutPage navigate={navigate} />}
-        {page === 'Portfolio' && (
-          <PortfolioPage
-            filter={filter}
-            setFilter={setFilter}
-            visibleProjects={visibleProjects}
-            navigate={navigate}
-          />
-        )}
-        {page === 'Contact' && <ContactPage submitted={submitted} setSubmitted={setSubmitted} />}
-      </main>
+    <div className="min-h-screen bg-slate-50 text-slate-950">
+      <Navbar page={page} navigate={navigate} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <AnimatePresence mode="wait">
+        <motion.main
+          key={page}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+        >
+          {page === 'Home' && <HomePage navigate={navigate} />}
+          {page === 'Projects' && (
+            <ProjectsPage filter={filter} setFilter={setFilter} shownProjects={shownProjects} navigate={navigate} />
+          )}
+          {page === 'Contact Us' && <ContactPage submitted={submitted} setSubmitted={setSubmitted} navigate={navigate} />}
+        </motion.main>
+      </AnimatePresence>
       <Footer navigate={navigate} />
     </div>
   )
 }
 
-function Header({ page, menuOpen, setMenuOpen, navigate }) {
+const fadeUp = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
+}
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+}
+
+function Navbar({ page, navigate, menuOpen, setMenuOpen }) {
   return (
-    <header className="nav">
-      <div className="nav-inner">
-        <button className="logo" type="button" onClick={() => navigate('Home')} aria-label="Salvin Industry home">
-          <img src={SalvinLogo} style={{height:"50px"}} alt="Salvin Industry" />
+    <header className="site-nav fixed inset-x-0 top-0 z-50 px-4 py-4 transition-all duration-300">
+      <div className="mx-auto flex max-w-7xl items-center gap-6 rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm shadow-slate-200/70 backdrop-blur-xl lg:px-6">
+        <button className="flex items-center gap-3" type="button" onClick={() => navigate('Home')} aria-label="Salvin ERP home">
+          <img className="h-11 w-11 rounded-xl object-cover shadow-sm" src={SalvinLogo} alt="Salvin logo" />
+           <img src={SalvinLogo} style={{ height: '50px' }} alt="Salvin Industry" />
+          <span className="leading-tight">
+            <span className="block text-lg font-black tracking-tight text-slate-950">Salvin ERP</span>
+            <span className="block text-xs font-bold uppercase tracking-[0.18em] text-sky-700">Digital Systems</span>
+          </span>
         </button>
 
-        <nav className="nav-links" aria-label="Primary navigation">
-          {pages.map((item) => (
+        <nav className="ml-auto hidden items-center gap-2 md:flex" aria-label="Primary navigation">
+          {navItems.map((item) => (
             <button
-              className={page === item ? 'active' : ''}
+              className={`nav-link rounded-full px-4 py-2 text-sm font800 transition ${page === item ? 'active text-sky-700' : 'text-slate-600 hover:text-sky-700'}`}
               key={item}
               type="button"
               onClick={() => navigate(item)}
@@ -185,31 +268,34 @@ function Header({ page, menuOpen, setMenuOpen, navigate }) {
           ))}
         </nav>
 
-        <button className="btn-nav" type="button" onClick={() => navigate('Contact')}>
-          Get in Touch
+        <button className="hidden rounded-full bg-slate-950 px-5 py-3 text-sm font900 text-white shadow-lg shadow-slate-300 transition hover:-translate-y-0.5 hover:bg-sky-700 md:inline-flex" type="button" onClick={() => navigate('Contact Us')}>
+          Book Consultation
         </button>
         <button
-          className="hamburger"
+          className="ml-auto inline-grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-white text-slate-900 md:hidden"
           type="button"
           aria-label="Toggle navigation"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((open) => !open)}
         >
-          <span />
-          <span />
-          <span />
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
-      <nav className={`mobile-menu${menuOpen ? ' open' : ''}`} aria-label="Mobile navigation">
-        {pages.map((item) => (
-          <button key={item} type="button" onClick={() => navigate(item)}>
-            {item}
-          </button>
-        ))}
-        <button className="btn-mobile" type="button" onClick={() => navigate('Contact')}>
-          Get in Touch
-        </button>
-      </nav>
+
+      {menuOpen && (
+        <motion.nav
+          className="mx-auto mt-2 grid max-w-7xl gap-2 rounded-2xl border border-white/70 bg-white/95 p-3 shadow-xl shadow-slate-200/80 backdrop-blur-xl md:hidden"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          aria-label="Mobile navigation"
+        >
+          {navItems.map((item) => (
+            <button className="rounded-xl px-4 py-3 text-left font800 text-slate-700 hover:bg-sky-50 hover:text-sky-700" key={item} type="button" onClick={() => navigate(item)}>
+              {item}
+            </button>
+          ))}
+        </motion.nav>
+      )}
     </header>
   )
 }
@@ -217,376 +303,325 @@ function Header({ page, menuOpen, setMenuOpen, navigate }) {
 function HomePage({ navigate }) {
   return (
     <>
-      <section className="hero">
-        <Background />
-        <div className="hero-inner">
-          <div className="hero-badge">
-            <span className="badge-dot" />
-            Trusted across 10+ industry verticals
-          </div>
-          <h1>
-            One platform.
-            <br />
-            <span className="gradient-text">Endless growth.</span>
-          </h1>
-          <p>
-            Salvin Industry powers growth across food, hospitality, real estate, pharma, engineering,
-            trading, events, and retail with precision, trust, and innovation.
-          </p>
-          <div className="hero-cta">
-            <button className="btn-primary" type="button" onClick={() => navigate('Services')}>
-              Explore Services
-            </button>
-            <button className="btn-ghost" type="button" onClick={() => navigate('About')}>
-              Our Story
-            </button>
-          </div>
-          <Stats />
-        </div>
-        <div className="floating-cards">
-          <FloatingCard label="Hospitality" detail="Premium segment" />
-          <FloatingCard label="Pharma" detail="Compliance first" />
-          <FloatingCard label="Real Estate" detail="Commercial and residential" />
-        </div>
-      </section>
-      <Marquee />
-      <ServicesOverview navigate={navigate} />
-      <WhySalvin navigate={navigate} />
-      <Workflow />
+      <Hero navigate={navigate} />
+      <LogoStrip />
+      <About />
+      <Services />
+      <WhyChoose />
+      <Industries />
+      <Modules />
+      <Process />
+      <Technology />
+      <Benefits />
       <Testimonials />
-      <Cta title="Ready to partner with Salvin?" navigate={navigate} />
+      <Stats />
+      <FAQ />
+      <FinalCTA navigate={navigate} />
     </>
   )
 }
 
-function ServicesPage({ navigate }) {
+function Hero({ navigate }) {
   return (
-    <>
-      <PageHero
-        tag="Our Services"
-        title="Diverse industries. One trusted partner."
-        copy="From FMCG to pharmaceuticals, hospitality to heavy engineering, Salvin Industry delivers excellence at every scale."
-      />
-      <div className="service-pills">
-        {industries.map((industry) => (
-          <a href={`#${industry.id}`} key={industry.id}>
-            {industry.title}
-          </a>
+    <section className="hero-section relative overflow-hidden px-4 pb-20 pt-36 sm:pt-40 lg:pb-28">
+      <div className="hero-grid absolute inset-0 opacity-70" />
+      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
+        <motion.div variants={stagger} initial="hidden" animate="show" className="relative z-10">
+          <motion.div variants={fadeUp} className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-100 bg-white/80 px-4 py-2 text-sm font800 text-sky-700 shadow-sm backdrop-blur">
+            <Sparkles size={16} /> ERP, CRM, automation, dashboards
+          </motion.div>
+          <motion.h1 variants={fadeUp} className="max-w-4xl text-4xl font-black leading-[1.05] tracking-tight text-slate-950 sm:text-5xl lg:text-7xl">
+            Enterprise software that turns complex operations into clear growth.
+          </motion.h1>
+          <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+            We design and build ERP, CRM, analytics, workflow automation, and custom software for companies that need reliable systems, faster decisions, and scalable execution.
+          </motion.p>
+          <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <button className="primary-btn" type="button" onClick={() => navigate('Contact Us')}>
+              Start ERP/CRM Project <ArrowRight size={18} />
+            </button>
+            <button className="secondary-btn" type="button" onClick={() => navigate('Projects')}>
+              View Case Studies
+            </button>
+          </motion.div>
+          <motion.div variants={fadeUp} className="mt-10 grid max-w-2xl grid-cols-3 gap-3">
+            {benefits.slice(0, 3).map(([value, label]) => (
+              <div className="glass-panel rounded-2xl p-4" key={label}>
+                <strong className="block text-2xl font-black text-slate-950">{value}</strong>
+                <span className="text-sm font700 text-slate-500">{label}</span>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+        <motion.div className="relative z-10" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.65 }}>
+          <EnterpriseVisual />
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+function EnterpriseVisual() {
+  const [activeModule, setActiveModule] = useState(0)
+  const selected = heroModules[activeModule]
+  const SelectedIcon = selected.icon
+
+  return (
+    <div className="erp-hero-panel glass-panel">
+      <p className="erp-panel-title">What we build for you</p>
+
+      <div className="erp-modules-grid">
+        {heroModules.map((module, index) => {
+          const Icon = module.icon
+          return (
+            <button
+              className={`erp-module-card ${activeModule === index ? 'active' : ''}`}
+              type="button"
+              key={module.title}
+              onClick={() => setActiveModule(index)}
+            >
+              <Icon className="erp-module-icon" size={21} aria-hidden="true" />
+              <span className="erp-module-name">{module.title}</span>
+              <span className="erp-module-sub">{module.sub}</span>
+            </button>
+          )
+        })}
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          className="erp-detail-box"
+          key={selected.title}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.18 }}
+        >
+          <div className="erp-detail-header">
+            <div className="erp-detail-icon">
+              <SelectedIcon size={19} aria-hidden="true" />
+            </div>
+            <p className="erp-detail-title">{selected.title}</p>
+          </div>
+          <p className="erp-detail-desc">{selected.desc}</p>
+          <div className="erp-feature-pills">
+            {selected.pills.map((pill) => (
+              <span className="erp-pill" key={pill}>
+                {pill}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="erp-flow-bar" aria-label="ERP workflow">
+        <span className="erp-flow-step">
+          <DatabaseZap size={15} aria-hidden="true" /> Data collected
+        </span>
+        <span className="erp-flow-arrow">&gt;</span>
+        <span className="erp-flow-step">
+          <Workflow size={15} aria-hidden="true" /> Auto-processed
+        </span>
+        <span className="erp-flow-arrow">&gt;</span>
+        <span className="erp-flow-step">
+          <BarChart3 size={15} aria-hidden="true" /> Insights ready
+        </span>
+        <span className="erp-flow-arrow">&gt;</span>
+        <span className="erp-flow-step">
+          <Rocket size={15} aria-hidden="true" /> Growth happens
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function LogoStrip() {
+  return (
+    <section className="border-y border-slate-200 bg-white py-5">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-4 px-4 text-sm font900 uppercase tracking-[0.18em] text-slate-400">
+        {['ERP', 'CRM', 'BI', 'Automation', 'Integrations', 'Cloud'].map((item) => (
+          <span key={item}>{item}</span>
         ))}
       </div>
-      {industries.map((industry, index) => (
-        <section className="industry-section" id={industry.id} key={industry.id}>
-          <div className={`industry-inner${index % 2 ? ' reverse' : ''}`}>
-            <div className="industry-content">
-              <div className="section-tag">{industry.title}</div>
-              <h2>{industry.heading}</h2>
-              <p>{industry.copy}</p>
-              <div className="industry-tags">
-                {industry.tags.map((tag) => (
-                  <span className="itag" key={tag}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <button className="btn-primary" type="button" onClick={() => navigate('Contact')}>
-                Partner With Us
-              </button>
-            </div>
-            <div className="industry-visual glass-card">
-              <span>{industry.icon}</span>
-            </div>
-          </div>
-        </section>
-      ))}
-      <Cta title="Have a project in mind?" navigate={navigate} />
-    </>
+    </section>
   )
 }
 
-function AboutPage({ navigate }) {
+function SectionHeading({ eyebrow, title, copy }) {
   return (
-    <>
-      <PageHero
-        tag="About Salvin"
-        title="Built on trust. Grown on results."
-        copy="15+ years of building industry-defining businesses across India and beyond."
-      />
-      <section className="section-pad">
-        <div className="container three-grid">
+    <motion.div className="mx-auto mb-12 max-w-3xl text-center" initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} variants={stagger}>
+      <motion.p variants={fadeUp} className="section-eyebrow">{eyebrow}</motion.p>
+      <motion.h2 variants={fadeUp} className="section-title">{title}</motion.h2>
+      {copy && <motion.p variants={fadeUp} className="section-copy">{copy}</motion.p>}
+    </motion.div>
+  )
+}
+
+function About() {
+  return (
+    <section className="section-space bg-slate-50 px-4">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
+          <motion.p variants={fadeUp} className="section-eyebrow text-left">About company</motion.p>
+          <motion.h2 variants={fadeUp} className="section-title text-left">ERP/CRM partner for teams that have outgrown spreadsheets and disconnected tools.</motion.h2>
+          <motion.p variants={fadeUp} className="mt-5 text-lg leading-8 text-slate-600">
+            Salvin ERP helps growing companies centralize operations, automate repetitive work, and convert raw business data into confident decisions. We combine product thinking, engineering discipline, and enterprise implementation experience.
+          </motion.p>
+        </motion.div>
+        <motion.div className="grid gap-4 sm:grid-cols-2" initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
           {[
-            ['Our Mission', 'Build a future where diverse industries thrive together and create sustainable stakeholder value.'],
-            ['Our Vision', "Become India's most trusted multi-industry conglomerate through integrity and innovation."],
-            ['Our Values', 'Integrity, excellence, collaboration, sustainability, and client-first execution.'],
-          ].map(([title, copy]) => (
-            <article className="glass-card value-card" key={title}>
+            [Target, 'Business-first discovery', 'We map real pain points before writing code.'],
+            [Layers3, 'Modular architecture', 'Start focused, then scale across departments.'],
+            [ShieldCheck, 'Security-minded delivery', 'Access control, audit trails, and reliable data handling.'],
+            [Headphones, 'Long-term support', 'Training, adoption, enhancements, and managed care.'],
+          ].map(([Icon, title, copy]) => (
+            <motion.article className="feature-card" variants={fadeUp} key={title}>
+              <Icon className="text-sky-600" size={26} />
               <h3>{title}</h3>
               <p>{copy}</p>
-            </article>
+            </motion.article>
           ))}
-        </div>
-      </section>
-      <section className="section-pad bg-light">
-        <SectionHeader
-          tag="Our Journey"
-          title="From vision to conglomerate"
-          copy="A story of strategic expansion, disciplined execution, and long-term thinking."
-        />
-        <div className="timeline">
-          {timeline.map(([year, title, copy]) => (
-            <article className="timeline-item" key={year}>
-              <div className="timeline-dot">{year.slice(2)}</div>
-              <div className="timeline-content">
-                <div className="timeline-year">{year}</div>
-                <h4>{title}</h4>
-                <p>{copy}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="section-pad">
-        <div className="container stat-grid">
-          {['15+ Years', '10+ Verticals', '800+ Team', '12 Markets'].map((item) => (
-            <strong className="stat-large" key={item}>
-              {item}
-            </strong>
-          ))}
-        </div>
-      </section>
-      <section className="section-pad bg-light">
-        <SectionHeader tag="Leadership" title="The minds behind Salvin" />
-        <div className="container team-grid">
-          {[
-            ['RS', 'Rajiv Salvin', 'Founder & Chairman'],
-            ['PD', 'Priya Desai', 'CEO, Hospitality & Events'],
-            ['AK', 'Anand Kumar', 'Head, Pharmaceutical & Chemical'],
-          ].map(([initials, name, role]) => (
-            <article className="team-card" key={name}>
-              <div className="team-avatar">{initials}</div>
-              <h4>{name}</h4>
-              <span>{role}</span>
-            </article>
-          ))}
-        </div>
-      </section>
-      <Cta title="Join the Salvin story" navigate={navigate} />
-    </>
-  )
-}
-
-function PortfolioPage({ filter, setFilter, visibleProjects, navigate }) {
-  const filters = ['all', 'realestate', 'hospitality', 'engineering', 'pharma', 'events']
-  return (
-    <>
-      <PageHero
-        tag="Portfolio"
-        title="Work that speaks for itself"
-        copy="Selected projects spanning industries, geographies, and scales."
-      />
-      <div className="filter-tabs">
-        {filters.map((item) => (
-          <button
-            className={filter === item ? 'active' : ''}
-            key={item}
-            type="button"
-            onClick={() => setFilter(item)}
-          >
-            {item === 'all' ? 'All Projects' : item}
-          </button>
-        ))}
-      </div>
-      <section className="section-pad">
-        <div className="container portfolio-grid">
-          {visibleProjects.map(([cat, title, copy]) => (
-            <article className="portfolio-card" key={title}>
-              <div className="portfolio-img">{cat.slice(0, 3).toUpperCase()}</div>
-              <div className="portfolio-info">
-                <h4>{title}</h4>
-                <p>{copy}</p>
-                <span>{cat}</span>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <Cta title="Your project could be next" navigate={navigate} />
-    </>
-  )
-}
-
-function ContactPage({ submitted, setSubmitted }) {
-  return (
-    <>
-      <PageHero
-        tag="Contact Us"
-        title="Let's build something great"
-        copy="Reach out for partnerships, projects, or investment opportunities. We respond within 24 hours."
-      />
-      <section className="section-pad">
-        <div className="container contact-layout">
-          <div>
-            <h3>Get in Touch</h3>
-            {[
-              ['Email Us', 'info@salvinindustry.com'],
-              ['Call Us', '+91 98000 00000'],
-              ['Our Office', 'Salvin House, SG Highway, Ahmedabad, Gujarat 380054'],
-              ['Business Hours', 'Mon-Sat: 9:30 AM - 6:30 PM IST'],
-            ].map(([title, copy]) => (
-              <article className="contact-info-item" key={title}>
-                <div className="contact-info-icon">{title.slice(0, 2)}</div>
-                <div>
-                  <strong>{title}</strong>
-                  <span>{copy}</span>
-                </div>
-              </article>
-            ))}
-            <div className="contact-tags">
-              {['Business partnership', 'Investment enquiry', 'Procurement', 'Project brief', 'Careers'].map((tag) => (
-                <span className="itag" key={tag}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="contact-form-wrap">
-            {submitted ? (
-              <div className="success-box">
-                <strong>Message sent.</strong>
-                <span>Our team will get back to you within 24 hours.</span>
-              </div>
-            ) : (
-              <form
-                onSubmit={(event) => {
-                  event.preventDefault()
-                  setSubmitted(true)
-                }}
-              >
-                <div className="form-row">
-                  <FormField label="First Name" placeholder="Rajesh" />
-                  <FormField label="Last Name" placeholder="Kumar" />
-                </div>
-                <div className="form-row">
-                  <FormField label="Email Address" placeholder="rajesh@company.com" type="email" />
-                  <FormField label="Phone Number" placeholder="+91 98000 00000" type="tel" required={false} />
-                </div>
-                <FormField label="Company / Organization" placeholder="Your company name" required={false} />
-                <label className="form-group">
-                  Interested In
-                  <select required defaultValue="">
-                    <option value="" disabled>
-                      Select a topic...
-                    </option>
-                    {industries.map((industry) => (
-                      <option key={industry.id}>{industry.title}</option>
-                    ))}
-                    <option>Investment Opportunity</option>
-                    <option>Other</option>
-                  </select>
-                </label>
-                <label className="form-group">
-                  Your Message
-                  <textarea placeholder="Describe your project or inquiry..." required />
-                </label>
-                <button className="btn-primary submit-button" type="submit">
-                  Send Message
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
-      <div className="map-band">
-        <strong>Salvin Industry Headquarters</strong>
-        <span>Salvin House, SG Highway, Ahmedabad, Gujarat 380054</span>
-      </div>
-    </>
-  )
-}
-
-function FormField({ label, placeholder, type = 'text', required = true }) {
-  return (
-    <label className="form-group">
-      {label}
-      <input type={type} placeholder={placeholder} required={required} />
-    </label>
-  )
-}
-
-function ServicesOverview({ navigate }) {
-  return (
-    <section className="section-pad">
-      <SectionHeader
-        tag="What We Do"
-        title="Built for every industry. Designed for growth."
-        copy="From raw materials to refined experiences, Salvin Industry operates with precision across diverse sectors."
-      />
-      <div className="container services-grid">
-        {industries.map((industry) => (
-          <article className="service-card" key={industry.id}>
-            <div className="service-icon-wrap">{industry.icon}</div>
-            <h3>{industry.title}</h3>
-            <p>{industry.copy}</p>
-            <button type="button" onClick={() => navigate('Services')}>
-              Learn more
-            </button>
-          </article>
-        ))}
+        </motion.div>
       </div>
     </section>
   )
 }
 
-function WhySalvin({ navigate }) {
+function Services() {
   return (
-    <section className="section-pad bg-light">
-      <div className="container why-inner">
+    <section className="section-space bg-white px-4">
+      <SectionHeading
+        eyebrow="ERP & CRM services"
+        title="One partner for systems, automation, and business visibility."
+        copy="We deliver the core software capabilities modern companies need to operate with discipline and scale without chaos."
+      />
+      <motion.div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-3" initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
+        {services.map(([title, copy, Icon]) => (
+          <motion.article className="service-card" variants={fadeUp} key={title}>
+            <div className="icon-box"><Icon size={24} /></div>
+            <h3>{title}</h3>
+            <p>{copy}</p>
+          </motion.article>
+        ))}
+      </motion.div>
+    </section>
+  )
+}
+
+function WhyChoose() {
+  const reasons = [
+    'Domain-led consultants who understand approval chains, inventory movement, sales funnels, billing, and reporting pressure.',
+    'Reusable components and clean architecture that keep delivery fast without trapping you in generic software.',
+    'Transparent roadmap, sprint demos, documentation, user training, and post-launch support.',
+    'Strong UI/UX, responsive portals, secure access roles, and dashboards people can trust.',
+  ]
+  return (
+    <section className="section-space blue-band px-4">
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr]">
         <div>
-          <div className="section-tag">Why Salvin</div>
-          <h2 className="section-title">The conglomerate advantage</h2>
-          <p className="section-sub">
-            Our diversified portfolio is strategic synergy. When industries interconnect, value multiplies.
+          <p className="section-eyebrow text-left">Why choose us</p>
+          <h2 className="section-title text-left text-blue-200">Premium engineering with enterprise implementation discipline.</h2>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-sky-100">
+            We do more than ship screens. We help teams redesign operations, reduce leakage, and build systems that leaders can rely on.
           </p>
-          <div className="feature-list">
-            {[
-              ['Cross-industry synergies', 'F&B supports hospitality. Chemical supports pharma. Everything compounds.'],
-              ['Compliance first', 'Every operation upholds high local and international standards.'],
-              ['Proven execution', '500+ projects across sectors with measurable outcomes.'],
-            ].map(([title, copy]) => (
-              <article className="feature-item" key={title}>
-                <span>OK</span>
-                <div>
-                  <strong>{title}</strong>
-                  <p>{copy}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-          <button className="btn-primary" type="button" onClick={() => navigate('About')}>
-            Our Story
-          </button>
         </div>
-        <Dashboard />
+        <div className="grid gap-4">
+          {reasons.map((reason) => (
+            <div className="reason-row" key={reason}>
+              <CheckCircle2 size={22} />
+              <span>{reason}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
 }
 
-function Workflow() {
+function Industries() {
   return (
-    <section className="section-pad">
-      <SectionHeader
-        tag="Our Process"
-        title="How Salvin delivers"
-        copy="A streamlined approach that transforms opportunity into operational excellence."
-      />
-      <div className="container workflow-steps">
-        {['Discovery', 'Strategy', 'Execution', 'Scale'].map((step, index) => (
-          <article className="wstep" key={step}>
-            <div className="wstep-num">{String(index + 1).padStart(2, '0')}</div>
-            <h4>{step}</h4>
-            <p>{['Analyze opportunity', 'Plan with data', 'Execute precisely', 'Optimize continuously'][index]}</p>
+    <section className="section-space bg-slate-50 px-4">
+      <SectionHeading eyebrow="Industries we serve" title="Built for process-heavy businesses." copy="Our ERP and CRM systems adapt to industry workflows, compliance needs, team structures, and reporting rhythms." />
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 md:grid-cols-4">
+        {industries.map((industry, index) => (
+          <motion.div className="industry-pill" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.03 }} key={industry}>
+            <Factory size={20} />
+            {industry}
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Modules() {
+  return (
+    <section className="section-space bg-white px-4">
+      <SectionHeading eyebrow="Features & modules" title="Everything your business needs in one connected platform." />
+      <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {modules.map(([title, copy]) => (
+          <article className="module-card" key={title}>
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-50 text-sky-700">
+              <Layers3 size={22} />
+            </div>
+            <h3>{title}</h3>
+            <p>{copy}</p>
           </article>
         ))}
+      </div>
+    </section>
+  )
+}
+
+function Process() {
+  return (
+    <section className="section-space bg-slate-50 px-4">
+      <SectionHeading eyebrow="Development workflow" title="Structured delivery from discovery to adoption." />
+      <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
+        {process.map(([step, title, copy]) => (
+          <article className="process-card" key={title}>
+            <span>{step}</span>
+            <h3>{title}</h3>
+            <p>{copy}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Technology() {
+  return (
+    <section className="section-space bg-white px-4">
+      <SectionHeading eyebrow="Technology stack" title="Modern, secure, integration-ready engineering." copy="We choose proven tools that keep systems maintainable, fast, and ready for future expansion." />
+      <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-3">
+        {techStack.map((tech) => (
+          <span className="tech-chip" key={tech}>{tech}</span>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function Benefits() {
+  return (
+    <section className="section-space bg-slate-50 px-4">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p className="section-eyebrow text-left">Client benefits</p>
+          <h2 className="section-title text-left">Measurable results across operations, sales, finance, and leadership.</h2>
+          <p className="mt-5 text-lg leading-8 text-slate-600">
+            Better systems reduce delays, expose risks early, improve accountability, and help every team work from one version of truth.
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {benefits.map(([value, label]) => (
+            <div className="result-card" key={label}>
+              <strong>{value}</strong>
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -594,12 +629,12 @@ function Workflow() {
 
 function Testimonials() {
   return (
-    <section className="section-pad bg-light">
-      <SectionHeader tag="Client Stories" title="What our partners say" />
-      <div className="container testi-grid">
+    <section className="section-space bg-white px-4">
+      <SectionHeading eyebrow="Testimonials" title="Trusted by leaders who need control, speed, and clarity." />
+      <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
         {testimonials.map(([name, role, quote]) => (
-          <article className="testi-card glass-card" key={name}>
-            <div className="testi-stars">★★★★★</div>
+          <article className="testimonial-card" key={role}>
+            <div className="mb-5 text-amber-400">★★★★★</div>
             <p>"{quote}"</p>
             <strong>{name}</strong>
             <span>{role}</span>
@@ -610,51 +645,224 @@ function Testimonials() {
   )
 }
 
-function Dashboard() {
+function Stats() {
   return (
-    <div className="dashboard-mockup glass-card">
-      <div className="dash-header">
-        <span />
-        <span />
-        <span />
-        <strong>Salvin Operations Dashboard</strong>
-      </div>
-      <div className="dash-stats-row">
-        <div>
-          <strong>Rs 240Cr</strong>
-          <span>Annual revenue</span>
-        </div>
-        <div>
-          <strong>10+</strong>
-          <span>Business units</span>
-        </div>
-      </div>
-      <div className="bar-chart">
-        {[55, 72, 48, 88, 63, 41].map((height, index) => (
-          <i key={height + index} style={{ height: `${height}%` }} />
+    <section className="px-4 py-12">
+      <div className="mx-auto grid max-w-7xl gap-4 rounded-[2rem] bg-slate-950 p-6 text-white shadow-2xl shadow-slate-300 md:grid-cols-4">
+        {[
+          ['120+', 'modules delivered'],
+          ['18+', 'industries served'],
+          ['40%', 'avg. reporting time saved'],
+          ['24 hr', 'support response goal'],
+        ].map(([value, label]) => (
+          <div className="p-5 text-center" key={label}>
+            <strong className="block text-4xl font-black">{value}</strong>
+            <span className="mt-2 block text-sm font800 uppercase tracking-[0.16em] text-sky-200">{label}</span>
+          </div>
         ))}
       </div>
-      <div className="dash-tags">
-        <span>Real estate Q4 surge</span>
-        <span>Hospitality expanding</span>
+    </section>
+  )
+}
+
+function FAQ() {
+  return (
+    <section className="section-space bg-slate-50 px-4">
+      <SectionHeading eyebrow="FAQ" title="Answers before we start." />
+      <div className="mx-auto grid max-w-4xl gap-4">
+        {faqs.map(([question, answer]) => (
+          <details className="faq-item" key={question}>
+            <summary>{question}<ChevronDown size={20} /></summary>
+            <p>{answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function ProjectsPage({ filter, setFilter, shownProjects, navigate }) {
+  return (
+    <>
+      <PageHero eyebrow="Projects" title="ERP and CRM case studies built for real business outcomes." copy="Explore industry-wise implementations, dashboard mockups, automation flows, and technology decisions behind scalable systems." />
+      <section className="border-b border-slate-200 bg-white px-4 py-4 sticky top-[92px] z-30">
+        <div className="mx-auto flex max-w-7xl gap-3 overflow-x-auto">
+          {projectFilters.map((item) => (
+            <button className={`filter-btn ${filter === item ? 'active' : ''}`} key={item} type="button" onClick={() => setFilter(item)}>
+              {item}
+            </button>
+          ))}
+        </div>
+      </section>
+      <section className="section-space bg-slate-50 px-4">
+        <motion.div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3" initial="hidden" animate="show" variants={stagger}>
+          {shownProjects.map((project) => (
+            <motion.article className="project-card group" variants={fadeUp} key={project.title}>
+              <DashboardMockup category={project.category} />
+              <div className="p-6">
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font900 uppercase tracking-[0.14em] text-sky-700">{project.category}</span>
+                  <span className="text-sm font800 text-slate-400">{project.industry}</span>
+                </div>
+                <h3 className="text-xl font-black tracking-tight text-slate-950">{project.title}</h3>
+                <p className="mt-3 leading-7 text-slate-600">{project.copy}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {project.stack.map((tech) => (
+                    <span className="rounded-full border border-slate-200 px-3 py-1 text-xs font800 text-slate-500" key={tech}>{tech}</span>
+                  ))}
+                </div>
+                <div className="mt-5 rounded-2xl bg-slate-950 px-4 py-3 text-sm font900 text-white">{project.metric}</div>
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </section>
+      <FinalCTA title="Need a project like these?" copy="Share your workflow problem. We will map the right ERP, CRM, dashboard, or automation path." navigate={navigate} />
+    </>
+  )
+}
+
+function DashboardMockup({ category }) {
+  return (
+    <div className="dashboard-shot">
+      <div className="mb-3 flex items-center gap-2">
+        <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+        <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+        <strong className="ml-auto text-xs font900 uppercase tracking-[0.14em] text-slate-400">{category}</strong>
+      </div>
+      <div className="grid grid-cols-3 gap-2">
+        <span className="h-14 rounded-xl bg-sky-100" />
+        <span className="h-14 rounded-xl bg-indigo-100" />
+        <span className="h-14 rounded-xl bg-emerald-100" />
+      </div>
+      <div className="mt-3 h-24 rounded-xl bg-white p-3">
+        <div className="bar-row small">
+          {[50, 72, 44, 90, 64, 82].map((height, index) => (
+            <i style={{ height: `${height}%` }} key={index} />
+          ))}
+        </div>
       </div>
     </div>
   )
 }
 
-function Cta({ title, navigate }) {
+function ContactPage({ submitted, setSubmitted, navigate }) {
   return (
-    <section className="cta-section">
-      <div className="cta-inner">
-        <h2>{title}</h2>
-        <p>Whether scaling operations or entering a new market, Salvin Industry brings the expertise you need.</p>
-        <div className="cta-buttons">
-          <button className="btn-primary" type="button" onClick={() => navigate('Contact')}>
-            Start a Conversation
-          </button>
-          <button className="btn-outline-white" type="button" onClick={() => navigate('Services')}>
-            View Services
-          </button>
+    <>
+      <PageHero eyebrow="Contact us" title="Let’s design your next ERP, CRM, or automation system." copy="Tell us where operations feel slow, disconnected, or unclear. We will help convert it into a focused software roadmap." />
+      <section className="section-space bg-slate-50 px-4">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+          <div className="grid content-start gap-4">
+            {[
+              [Mail, 'Email', 'hello@salvinerp.com'],
+              [Phone, 'Phone', '+91 98000 00000'],
+              [MapPin, 'Address', 'Salvin House, SG Highway, Ahmedabad, Gujarat 380054'],
+              [Clock3, 'Business Hours', 'Mon-Sat, 9:30 AM - 6:30 PM IST'],
+            ].map(([Icon, title, copy]) => (
+              <article className="contact-info" key={title}>
+                <Icon className="text-sky-700" size={24} />
+                <div>
+                  <strong>{title}</strong>
+                  <span>{copy}</span>
+                </div>
+              </article>
+            ))}
+            <div className="social-row">
+              {['LinkedIn', 'X', 'Facebook', 'Instagram'].map((item) => (
+                <a href={`#${item.toLowerCase()}`} key={item} aria-label={item}>{item.slice(0, 2)}</a>
+              ))}
+            </div>
+          </div>
+          <div className="form-card">
+            {submitted ? (
+              <div className="success-state">
+                <CheckCircle2 size={42} />
+                <h3>Message received.</h3>
+                <p>Our consulting team will respond within one business day.</p>
+                <button className="secondary-btn mx-auto" type="button" onClick={() => navigate('Projects')}>View Projects</button>
+              </div>
+            ) : (
+              <form
+                onSubmit={(event) => {
+                  event.preventDefault()
+                  setSubmitted(true)
+                }}
+              >
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label="Full Name" placeholder="Your name" />
+                  <Field label="Work Email" placeholder="name@company.com" type="email" />
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label="Phone" placeholder="+91 98000 00000" type="tel" />
+                  <Field label="Company" placeholder="Company name" />
+                </div>
+                <label className="field">
+                  Project Interest
+                  <select required defaultValue="">
+                    <option value="" disabled>Select service</option>
+                    <option>ERP Implementation</option>
+                    <option>CRM Development</option>
+                    <option>Workflow Automation</option>
+                    <option>Dashboards & Analytics</option>
+                    <option>Custom Software</option>
+                  </select>
+                </label>
+                <label className="field">
+                  Message
+                  <textarea placeholder="Tell us about your current process, tools, and goals..." required />
+                </label>
+                <button className="primary-btn w-full justify-center" type="submit">Send Consultation Request <ArrowRight size={18} /></button>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+      <section className="bg-white px-4 pb-20">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-slate-200 shadow-xl shadow-slate-200/70">
+          <iframe
+            title="Google map Ahmedabad"
+            className="h-80 w-full"
+            loading="lazy"
+            src="https://www.google.com/maps?q=SG%20Highway%20Ahmedabad%20Gujarat&output=embed"
+          />
+        </div>
+      </section>
+      <FinalCTA title="Ready for a smarter business system?" copy="Start with a discovery call and leave with a practical implementation direction." navigate={navigate} />
+    </>
+  )
+}
+
+function Field({ label, ...props }) {
+  return (
+    <label className="field">
+      {label}
+      <input required {...props} />
+    </label>
+  )
+}
+
+function PageHero({ eyebrow, title, copy }) {
+  return (
+    <section className="page-hero px-4 pb-16 pt-36">
+      <div className="mx-auto max-w-4xl text-center">
+        <p className="section-eyebrow">{eyebrow}</p>
+        <h1 className="text-4xl font-black leading-tight tracking-tight text-slate-950 sm:text-6xl">{title}</h1>
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600">{copy}</p>
+      </div>
+    </section>
+  )
+}
+
+function FinalCTA({ navigate, title = 'Build a connected, scalable business system.', copy = 'Book a strategy call for ERP, CRM, workflow automation, dashboards, or custom software.' }) {
+  return (
+    <section className="cta-band px-4 py-20">
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl">{title}</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-sky-100">{copy}</p>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <button className="primary-btn bg-white text-slate-950 hover:bg-sky-50" type="button" onClick={() => navigate('Contact Us')}>Book Consultation</button>
+          <button className="outline-btn" type="button" onClick={() => navigate('Projects')}>Explore Projects</button>
         </div>
       </div>
     </section>
@@ -663,112 +871,39 @@ function Cta({ title, navigate }) {
 
 function Footer({ navigate }) {
   return (
-    <footer className="footer">
-      <div className="container footer-grid">
+    <footer className="bg-slate-950 px-4 py-12 text-white">
+      <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
-          <button className="logo" type="button" onClick={() => navigate('Home')}>
-            <span className="logo-mark">S</span>
-            <span className="logo-text">
-              Salvin <span>Industry</span>
-            </span>
-          </button>
-          <p>Powering diverse industries with precision, trust, and innovation since 2009.</p>
+          <div className="flex items-center gap-3">
+            <img className="h-11 w-11 rounded-xl object-cover" src={SalvinLogo} alt="Salvin logo" />
+            <strong className="text-xl font-black">Salvin ERP</strong>
+          </div>
+          <p className="mt-4 max-w-sm leading-7 text-slate-400">Modern ERP, CRM, dashboards, automation, and custom software for ambitious businesses.</p>
         </div>
-        <div className="footer-col">
-          <h5>Services</h5>
-          {industries.slice(0, 5).map((industry) => (
-            <button key={industry.id} type="button" onClick={() => navigate('Services')}>
-              {industry.title}
-            </button>
-          ))}
-        </div>
-        <div className="footer-col">
-          <h5>Company</h5>
-          {['About', 'Portfolio', 'Contact'].map((item) => (
-            <button key={item} type="button" onClick={() => navigate(item)}>
-              {item}
-            </button>
-          ))}
-        </div>
-        <div className="footer-col">
-          <h5>Get in Touch</h5>
-          <p>info@salvinindustry.com<br />+91 98000 00000<br />Ahmedabad, Gujarat, India</p>
+        <FooterCol title="Pages" items={navItems} navigate={navigate} />
+        <FooterCol title="Services" items={['ERP', 'CRM', 'Automation', 'Analytics']} />
+        <div>
+          <h3 className="footer-title">Contact</h3>
+          <p className="leading-7 text-slate-400">hello@salvinerp.com<br />+91 98000 00000<br />Ahmedabad, Gujarat</p>
         </div>
       </div>
-      <div className="footer-bottom">
-        <span>© 2026 Salvin Industry. All rights reserved.</span>
-        <span>Privacy Policy · Terms of Use</span>
+      <div className="mx-auto mt-10 flex max-w-7xl flex-wrap justify-between gap-4 border-t border-white/10 pt-6 text-sm text-slate-500">
+        <span>© 2026 Salvin ERP. All rights reserved.</span>
+        <span>Built for enterprise clarity and growth.</span>
       </div>
     </footer>
   )
 }
 
-function Stats() {
+function FooterCol({ title, items, navigate }) {
   return (
-    <div className="hero-stats">
-      {stats.map(([value, label]) => (
-        <div className="stat-item" key={label}>
-          <strong>{value}</strong>
-          <span>{label}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function SectionHeader({ tag, title, copy }) {
-  return (
-    <div className="container section-header">
-      <div className="section-tag">{tag}</div>
-      <h2 className="section-title">{title}</h2>
-      {copy && <p className="section-sub">{copy}</p>}
-    </div>
-  )
-}
-
-function PageHero({ tag, title, copy }) {
-  return (
-    <section className="page-hero">
-      <Background />
-      <div className="page-hero-inner">
-        <div className="section-tag">{tag}</div>
-        <h1>{title}</h1>
-        <p>{copy}</p>
-      </div>
-    </section>
-  )
-}
-
-function Background() {
-  return (
-    <div className="hero-bg" aria-hidden="true">
-      <div className="orb orb-1" />
-      <div className="orb orb-2" />
-      <div className="orb orb-3" />
-      <div className="grid-overlay" />
-    </div>
-  )
-}
-
-function FloatingCard({ label, detail }) {
-  return (
-    <article className="fcard glass-card">
-      <div className="fcard-icon">{label.slice(0, 2)}</div>
-      <div>
-        <strong>{label}</strong>
-        <span>{detail}</span>
-      </div>
-    </article>
-  )
-}
-
-function Marquee() {
-  const labels = industries.map((industry) => industry.title)
-  return (
-    <div className="marquee-section">
-      <div className="marquee-track">
-        {[...labels, ...labels].map((label, index) => (
-          <span key={`${label}-${index}`}>{label}</span>
+    <div>
+      <h3 className="footer-title">{title}</h3>
+      <div className="grid gap-2">
+        {items.map((item) => (
+          <button className="w-fit text-left text-slate-400 transition hover:text-white" key={item} type="button" onClick={() => navigate?.(item)}>
+            {item}
+          </button>
         ))}
       </div>
     </div>

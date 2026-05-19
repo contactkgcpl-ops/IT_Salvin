@@ -1,104 +1,48 @@
-import heroAsset from '../../assets/hero.png'
-import SalvinLogo from '../../assets/salvin_logo.jpeg'
+import Background from '../Layout/Background.jsx'
+import Button from '../Button/Button.jsx'
+import Stats from '../Stats/Stats.jsx'
 
-const Hero = () => {
-  return (
-    <section className="hero-section" id="top">
-      <div className="hero-copy">
-        <p className="eyebrow">Modern CRM for growth teams</p>
-        <h1>Turn every enquiry into a tracked, automated customer journey.</h1>
-        <p className="hero-lede">
-          Salvin CRM brings leads, quotations, visits, service tickets, analytics, and ERP-ready
-          handoffs into one elegant workspace built for fast-moving teams.
-        </p>
-        <div className="hero-actions">
-          <a className="primary-button" href="#modules">
-            Explore CRM
-          </a>
-          <a className="secondary-button" href="#pipeline">
-            Watch Flow
-          </a>
-        </div>
-        <div className="hero-trust" aria-label="CRM highlights">
-          <span>AI-ready workflows</span>
-          <span>Mobile sales teams</span>
-          <span>ERP context</span>
-        </div>
-      </div>
+const FloatingCard = ({ label, detail }) => (
+  <article className="fcard glass-card">
+    <div className="fcard-icon">{label.slice(0, 2)}</div>
+    <div>
+      <strong>{label}</strong>
+      <span>{detail}</span>
+    </div>
+  </article>
+)
 
-      <div className="hero-visual" aria-label="Salvin CRM dashboard preview">
-        <img className="hero-orbit" src={heroAsset} alt="" />
-        <div className="floating-chip chip-one">+37 leads</div>
-        <div className="floating-chip chip-two">Quote approved</div>
-        <div className="orbital-cube" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="crm-console">
-          <div className="console-topbar">
-            <strong>Salvin CRM workspace</strong>
-            <span>Live</span>
-          </div>
-          <div className="crm-workspace">
-            <aside className="crm-sidebar">
-              <span className="active">Dashboard</span>
-              <span>Leads</span>
-              <span>Pipeline</span>
-              <span>Service</span>
-              <span>Reports</span>
-            </aside>
-            <div className="crm-main">
-              <div className="console-grid">
-                <div className="console-card console-card-large">
-                  <small>New enquiries today</small>
-                  <strong>37 leads</strong>
-                  <div className="lead-source-list">
-                    <span>
-                      <b>Website</b> 14
-                    </span>
-                    <span>
-                      <b>WhatsApp</b> 11
-                    </span>
-                    <span>
-                      <b>Field team</b> 8
-                    </span>
-                    <span>
-                      <b>Calls</b> 4
-                    </span>
-                  </div>
-                </div>
-                <div className="console-card">
-                  <small>Open pipeline</small>
-                  <strong>Rs 1.54Cr</strong>
-                  <div className="mini-bars" aria-hidden="true">
-                    <i />
-                    <i />
-                    <i />
-                    <i />
-                  </div>
-                </div>
-                <div className="console-card dark-card">
-                  <small>Won this month</small>
-                  <strong>Rs 52.7L</strong>
-                </div>
-                <div className="console-card activity-card">
-                  <small>Next follow-up</small>
-                  <strong>Apex Motors</strong>
-                  <p>Quote reminder due at 11:30 AM</p>
-                </div>
-                <div className="console-card service-card">
-                  <small>Service queue</small>
-                  <strong>12 tickets</strong>
-                  <p>4 high-priority installation issues</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+const Hero = ({ navigate }) => (
+  <section className="hero">
+    <Background />
+    <div className="hero-inner">
+      <div className="hero-badge">
+        <span className="badge-dot" />
+        Trusted across 10+ industry verticals
       </div>
-    </section>
-  )
-}
+      <h1>
+        One platform.
+        <br />
+        <span className="gradient-text">Endless growth.</span>
+      </h1>
+      <p>
+        Salvin Industry powers growth across food, hospitality, real estate, pharma, engineering, trading, events,
+        and retail with precision, trust, and innovation.
+      </p>
+      <div className="hero-cta">
+        <Button onClick={() => navigate('Services')}>Explore Services</Button>
+        <Button className="btn-ghost" onClick={() => navigate('About')}>
+          Our Story
+        </Button>
+      </div>
+      <Stats />
+    </div>
+    <div className="floating-cards">
+      <FloatingCard label="Hospitality" detail="Premium segment" />
+      <FloatingCard label="Pharma" detail="Compliance first" />
+      <FloatingCard label="Real Estate" detail="Commercial and residential" />
+    </div>
+  </section>
+)
 
 export default Hero

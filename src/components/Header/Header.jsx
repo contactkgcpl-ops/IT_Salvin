@@ -1,54 +1,48 @@
-import { useState } from 'react'
-import { navItems } from '../../data/crmData.js'
 import SalvinLogo from '../../assets/salvin_logo.jpeg'
+import { pages } from '../../data/siteData.js'
+import Button from '../Button/Button.jsx'
 
-const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const closeMenu = () => setMenuOpen(false)
+const Header = ({ page, menuOpen, setMenuOpen, navigate }) => (
+  <header className="nav">
+    <div className="nav-inner">
+      <button className="logo" type="button" onClick={() => navigate('Home')} aria-label="Salvin Industry home">
+        <img src={SalvinLogo} style={{ height: '50px' }} alt="Salvin Industry" />
+      </button>
 
-  return (
-    <header className="site-header">
-      <a className="brand-mark" href="#top" aria-label="Salvin CRM home" onClick={closeMenu}>
-        <img src={SalvinLogo} alt="Salvin CRM" />
-        <span>
-          <strong>Salvin</strong>
-          <small>CRM Cloud</small>
-        </span>
-      </a>
+      <nav className="nav-links" aria-label="Primary navigation">
+        {pages.map((item) => (
+          <button className={page === item ? 'active' : ''} key={item} type="button" onClick={() => navigate(item)}>
+            {item}
+          </button>
+        ))}
+      </nav>
 
+      <Button className="btn-nav" onClick={() => navigate('Contact')}>
+        Get in Touch
+      </Button>
       <button
-        className="menu-toggle"
+        className="hamburger"
         type="button"
-        aria-label="Toggle navigation menu"
+        aria-label="Toggle navigation"
         aria-expanded={menuOpen}
-        aria-controls="primary-navigation"
-        onClick={() => setMenuOpen((isOpen) => !isOpen)}
+        onClick={() => setMenuOpen((open) => !open)}
       >
         <span />
         <span />
         <span />
       </button>
-
-      <nav
-        className={`nav-links${menuOpen ? ' is-open' : ''}`}
-        id="primary-navigation"
-        aria-label="Primary navigation"
-      >
-        {navItems.map((item) => (
-          <a href={item === 'Overview' ? '#overview' : `#${item.toLowerCase()}`} key={item} onClick={closeMenu}>
-            {item}
-          </a>
-        ))}
-        <a className="mobile-demo-link" href="#contact" onClick={closeMenu}>
-          Book Demo
-        </a>
-      </nav>
-
-      <a className="header-action" href="#contact" onClick={closeMenu}>
-        Book Demo
-      </a>
-    </header>
-  )
-}
+    </div>
+    <nav className={`mobile-menu${menuOpen ? ' open' : ''}`} aria-label="Mobile navigation">
+      {pages.map((item) => (
+        <button key={item} type="button" onClick={() => navigate(item)}>
+          {item}
+        </button>
+      ))}
+      <button className="btn-mobile" type="button" onClick={() => navigate('Contact')}>
+        Get in Touch
+      </button>
+    </nav>
+  </header>
+)
 
 export default Header
