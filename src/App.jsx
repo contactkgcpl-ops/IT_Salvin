@@ -27,7 +27,10 @@ import {
 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
+import ProjectDashboardGreen from './assets/project-dashboard-green.jpg'
+import ProjectDashboardOffice from './assets/project-dashboard-office.jpg'
 import SalvinLogo from './assets/salvin_logo.jpeg'
+import Salvinbg from './assets/salvin.png'
 
 const navItems = ['Home', 'Projects', 'Contact Us']
 
@@ -179,6 +182,7 @@ const projects = [
 ]
 
 const projectFilters = ['All', 'ERP', 'CRM', 'Analytics', 'Workflow']
+const projectImages = [ProjectDashboardGreen, ProjectDashboardOffice]
 
 function App() {
   const [page, setPage] = useState('Home')
@@ -245,13 +249,12 @@ const stagger = {
 function Navbar({ page, navigate, menuOpen, setMenuOpen }) {
   return (
     <header className="site-nav fixed inset-x-0 top-0 z-50 px-4 py-4 transition-all duration-300">
-      <div className="mx-auto flex max-w-7xl items-center gap-6 rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm shadow-slate-200/70 backdrop-blur-xl lg:px-6">
+      <div className="mx-auto flex max-w-7xl items-center gap-3 rounded-2xl border border-white/70 bg-white/80 px-3 py-3 shadow-sm shadow-slate-200/70 backdrop-blur-xl sm:gap-6 sm:px-4 lg:px-6">
         <button className="flex items-center gap-3" type="button" onClick={() => navigate('Home')} aria-label="Salvin ERP home">
-          <img className="h-11 w-11 rounded-xl object-cover shadow-sm" src={SalvinLogo} alt="Salvin logo" />
-           <img src={SalvinLogo} style={{ height: '50px' }} alt="Salvin Industry" />
+           <img className="site-logo" src={SalvinLogo} alt="Salvin Industry" />
           <span className="leading-tight">
-            <span className="block text-lg font-black tracking-tight text-slate-950">Salvin ERP</span>
-            <span className="block text-xs font-bold uppercase tracking-[0.18em] text-sky-700">Digital Systems</span>
+            {/* <span className="block text-lg font-black tracking-tight text-slate-950">Salvin ERP</span> */}
+           {/* <span className="block text-xs font-bold uppercase tracking-[0.18em] text-sky-700">Digital Systems</span> */} 
           </span>
         </button>
 
@@ -323,20 +326,20 @@ function HomePage({ navigate }) {
 
 function Hero({ navigate }) {
   return (
-    <section className="hero-section relative overflow-hidden px-4 pb-20 pt-36 sm:pt-40 lg:pb-28">
+    <section className="hero-section relative overflow-hidden px-4 pb-10 pt-32 sm:pt-36 lg:pb-14 lg:pt-40">
       <div className="hero-grid absolute inset-0 opacity-70" />
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
-        <motion.div variants={stagger} initial="hidden" animate="show" className="relative z-10">
-          <motion.div variants={fadeUp} className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-100 bg-white/80 px-4 py-2 text-sm font800 text-sky-700 shadow-sm backdrop-blur">
+      <div className="hero-inner mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
+        <motion.div variants={stagger} initial="hidden" animate="show" className="hero-copy relative z-10">
+          <motion.div variants={fadeUp} className="hero-badge mb-5 inline-flex items-center gap-2 rounded-full border border-sky-100 bg-white/80 px-4 py-2 text-sm font800 text-sky-700 shadow-sm backdrop-blur">
             <Sparkles size={16} /> ERP, CRM, automation, dashboards
           </motion.div>
-          <motion.h1 variants={fadeUp} className="max-w-4xl text-4xl font-black leading-[1.05] tracking-tight text-slate-950 sm:text-5xl lg:text-7xl">
+          <motion.h1 variants={fadeUp} className="hero-title max-w-4xl text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
             Enterprise software that turns complex operations into clear growth.
           </motion.h1>
-          <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+          <motion.p variants={fadeUp} className="hero-copy-text mt-6 max-w-2xl text-lg leading-8 text-slate-600">
             We design and build ERP, CRM, analytics, workflow automation, and custom software for companies that need reliable systems, faster decisions, and scalable execution.
           </motion.p>
-          <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <motion.div variants={fadeUp} className="hero-actions mt-9 flex flex-col gap-3 sm:flex-row">
             <button className="primary-btn" type="button" onClick={() => navigate('Contact Us')}>
               Start ERP/CRM Project <ArrowRight size={18} />
             </button>
@@ -344,7 +347,7 @@ function Hero({ navigate }) {
               View Case Studies
             </button>
           </motion.div>
-          <motion.div variants={fadeUp} className="mt-10 grid max-w-2xl grid-cols-3 gap-3">
+          <motion.div variants={fadeUp} className="hero-stats mt-10 grid max-w-2xl grid-cols-3 gap-3">
             {benefits.slice(0, 3).map(([value, label]) => (
               <div className="glass-panel rounded-2xl p-4" key={label}>
                 <strong className="block text-2xl font-black text-slate-950">{value}</strong>
@@ -353,7 +356,7 @@ function Hero({ navigate }) {
             ))}
           </motion.div>
         </motion.div>
-        <motion.div className="relative z-10" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.65 }}>
+        <motion.div className="hero-visual-wrap relative z-10" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.65 }}>
           <EnterpriseVisual />
         </motion.div>
       </div>
@@ -368,6 +371,7 @@ function EnterpriseVisual() {
 
   return (
     <div className="erp-hero-panel glass-panel">
+      <img className="home-hero-image" src={ProjectDashboardGreen} alt="ERP dashboard in office workspace" />
       <p className="erp-panel-title">What we build for you</p>
 
       <div className="erp-modules-grid">
@@ -437,8 +441,8 @@ function EnterpriseVisual() {
 
 function LogoStrip() {
   return (
-    <section className="border-y border-slate-200 bg-white py-5">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-4 px-4 text-sm font900 uppercase tracking-[0.18em] text-slate-400">
+    <section className="border-y border-slate-200 bg-white py-4 my-1">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-4 px-4 text-sm font900 uppercase tracking-[0.18em] text-slate-800">
         {['ERP', 'CRM', 'BI', 'Automation', 'Integrations', 'Cloud'].map((item) => (
           <span key={item}>{item}</span>
         ))}
@@ -459,11 +463,11 @@ function SectionHeading({ eyebrow, title, copy }) {
 
 function About() {
   return (
-    <section className="section-space bg-slate-50 px-4">
+    <section className="pt-11 pb-20 bg-slate-50 px-4">
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
           <motion.p variants={fadeUp} className="section-eyebrow text-left">About company</motion.p>
-          <motion.h2 variants={fadeUp} className="section-title text-left">ERP/CRM partner for teams that have outgrown spreadsheets and disconnected tools.</motion.h2>
+          <motion.h2 variants={fadeUp} className="section-title text-left text-4xl">ERP/CRM partner for teams that have outgrown spreadsheets and disconnected tools.</motion.h2>
           <motion.p variants={fadeUp} className="mt-5 text-lg leading-8 text-slate-600">
             Salvin ERP helps growing companies centralize operations, automate repetitive work, and convert raw business data into confident decisions. We combine product thinking, engineering discipline, and enterprise implementation experience.
           </motion.p>
@@ -489,9 +493,9 @@ function About() {
 
 function Services() {
   return (
-    <section className="section-space bg-white px-4">
+    <section className="pt-5 pb-20 bg-white px-4">
       <SectionHeading
-        eyebrow="ERP & CRM services"
+        eyebrow="ERP & CRM services" 
         title="One partner for systems, automation, and business visibility."
         copy="We deliver the core software capabilities modern companies need to operate with discipline and scale without chaos."
       />
@@ -516,11 +520,11 @@ function WhyChoose() {
     'Strong UI/UX, responsive portals, secure access roles, and dashboards people can trust.',
   ]
   return (
-    <section className="section-space blue-band px-4">
+    <section className="section-space why-choose-band px-4">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr]">
         <div>
-          <p className="section-eyebrow text-left">Why choose us</p>
-          <h2 className="section-title text-left text-blue-200">Premium engineering with enterprise implementation discipline.</h2>
+          <p className="section-eyebrowwhy text-left">Why choose us</p>
+          <h2 className="section-titlewhy text-left text-blue-200">Premium engineering with enterprise implementation discipline.</h2>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-sky-100">
             We do more than ship screens. We help teams redesign operations, reduce leakage, and build systems that leaders can rely on.
           </p>
@@ -540,9 +544,9 @@ function WhyChoose() {
 
 function Industries() {
   return (
-    <section className="section-space bg-slate-50 px-4">
+    <section className="pt-15 pb-20 bg-slate-50 px-4">
       <SectionHeading eyebrow="Industries we serve" title="Built for process-heavy businesses." copy="Our ERP and CRM systems adapt to industry workflows, compliance needs, team structures, and reporting rhythms." />
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
         {industries.map((industry, index) => (
           <motion.div className="industry-pill" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.03 }} key={industry}>
             <Factory size={20} />
@@ -556,7 +560,7 @@ function Industries() {
 
 function Modules() {
   return (
-    <section className="section-space bg-white px-4">
+    <section className="pt-5 pb-20 bg-white px-4">
       <SectionHeading eyebrow="Features & modules" title="Everything your business needs in one connected platform." />
       <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {modules.map(([title, copy]) => (
@@ -575,9 +579,9 @@ function Modules() {
 
 function Process() {
   return (
-    <section className="section-space bg-slate-50 px-4">
+    <section className="pt-5 pb-20 bg-slate-50 px-4">
       <SectionHeading eyebrow="Development workflow" title="Structured delivery from discovery to adoption." />
-      <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-4">
         {process.map(([step, title, copy]) => (
           <article className="process-card" key={title}>
             <span>{step}</span>
@@ -592,7 +596,7 @@ function Process() {
 
 function Technology() {
   return (
-    <section className="section-space bg-white px-4">
+    <section className="pt-5 pb-20 bg-white px-4">
       <SectionHeading eyebrow="Technology stack" title="Modern, secure, integration-ready engineering." copy="We choose proven tools that keep systems maintainable, fast, and ready for future expansion." />
       <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-3">
         {techStack.map((tech) => (
@@ -605,7 +609,7 @@ function Technology() {
 
 function Benefits() {
   return (
-    <section className="section-space bg-slate-50 px-4">
+    <section className="pt-15 pb-20 bg-slate-50 px-4">
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <p className="section-eyebrow text-left">Client benefits</p>
@@ -629,7 +633,7 @@ function Benefits() {
 
 function Testimonials() {
   return (
-    <section className="section-space bg-white px-4">
+    <section className="pt-15 pb-20 bg-white px-4">
       <SectionHeading eyebrow="Testimonials" title="Trusted by leaders who need control, speed, and clarity." />
       <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
         {testimonials.map(([name, role, quote]) => (
@@ -647,8 +651,8 @@ function Testimonials() {
 
 function Stats() {
   return (
-    <section className="px-4 py-12">
-      <div className="mx-auto grid max-w-7xl gap-4 rounded-[2rem] bg-slate-950 p-6 text-white shadow-2xl shadow-slate-300 md:grid-cols-4">
+    <section className="px-4 py-5">
+      <div className="mx-auto grid max-w-7xl gap-4 rounded-[3rem] bg-slate-950 p-2 text-white shadow-2xl shadow-slate-300 md:grid-cols-4">
         {[
           ['120+', 'modules delivered'],
           ['18+', 'industries served'],
@@ -667,7 +671,7 @@ function Stats() {
 
 function FAQ() {
   return (
-    <section className="section-space bg-slate-50 px-4">
+    <section className="pt-10 pb-20 bg-slate-50 px-4">
       <SectionHeading eyebrow="FAQ" title="Answers before we start." />
       <div className="mx-auto grid max-w-4xl gap-4">
         {faqs.map(([question, answer]) => (
@@ -694,13 +698,13 @@ function ProjectsPage({ filter, setFilter, shownProjects, navigate }) {
           ))}
         </div>
       </section>
-      <section className="section-space bg-slate-50 px-4">
+      <section className="pt-15 pb-20 bg-slate-50 px-4">
         <motion.div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3" initial="hidden" animate="show" variants={stagger}>
-          {shownProjects.map((project) => (
+          {shownProjects.map((project, index) => (
             <motion.article className="project-card group" variants={fadeUp} key={project.title}>
-              <DashboardMockup category={project.category} />
+              <DashboardMockup category={project.category} image={projectImages[index % projectImages.length]} title={project.title} />
               <div className="p-6">
-                <div className="mb-4 flex items-center justify-between gap-3">
+                <div className="project-meta mb-4 flex items-center justify-between gap-3">
                   <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font900 uppercase tracking-[0.14em] text-sky-700">{project.category}</span>
                   <span className="text-sm font800 text-slate-400">{project.industry}</span>
                 </div>
@@ -722,7 +726,7 @@ function ProjectsPage({ filter, setFilter, shownProjects, navigate }) {
   )
 }
 
-function DashboardMockup({ category }) {
+function DashboardMockup({ category, image, title }) {
   return (
     <div className="dashboard-shot">
       <div className="mb-3 flex items-center gap-2">
@@ -731,18 +735,7 @@ function DashboardMockup({ category }) {
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
         <strong className="ml-auto text-xs font900 uppercase tracking-[0.14em] text-slate-400">{category}</strong>
       </div>
-      <div className="grid grid-cols-3 gap-2">
-        <span className="h-14 rounded-xl bg-sky-100" />
-        <span className="h-14 rounded-xl bg-indigo-100" />
-        <span className="h-14 rounded-xl bg-emerald-100" />
-      </div>
-      <div className="mt-3 h-24 rounded-xl bg-white p-3">
-        <div className="bar-row small">
-          {[50, 72, 44, 90, 64, 82].map((height, index) => (
-            <i style={{ height: `${height}%` }} key={index} />
-          ))}
-        </div>
-      </div>
+      <img className="dashboard-image" src={image} alt={`${title} dashboard preview`} loading="lazy" />
     </div>
   )
 }
@@ -751,7 +744,7 @@ function ContactPage({ submitted, setSubmitted, navigate }) {
   return (
     <>
       <PageHero eyebrow="Contact us" title="Let’s design your next ERP, CRM, or automation system." copy="Tell us where operations feel slow, disconnected, or unclear. We will help convert it into a focused software roadmap." />
-      <section className="section-space bg-slate-50 px-4">
+      <section className="pt-2 pb-20 bg-slate-50 px-4">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.82fr_1.18fr]">
           <div className="grid content-start gap-4">
             {[
@@ -847,7 +840,7 @@ function PageHero({ eyebrow, title, copy }) {
     <section className="page-hero px-4 pb-16 pt-36">
       <div className="mx-auto max-w-4xl text-center">
         <p className="section-eyebrow">{eyebrow}</p>
-        <h1 className="text-4xl font-black leading-tight tracking-tight text-slate-950 sm:text-6xl">{title}</h1>
+        <h1 className="text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">{title}</h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600">{copy}</p>
       </div>
     </section>
@@ -858,7 +851,7 @@ function FinalCTA({ navigate, title = 'Build a connected, scalable business syst
   return (
     <section className="cta-band px-4 py-20">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl">{title}</h2>
+        <h2 className="text-3xl font-black tracking-tight text-white sm:text-5xl">{title}</h2>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-sky-100">{copy}</p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <button className="primary-btn bg-white text-slate-950 hover:bg-sky-50" type="button" onClick={() => navigate('Contact Us')}>Book Consultation</button>
@@ -875,7 +868,7 @@ function Footer({ navigate }) {
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
           <div className="flex items-center gap-3">
-            <img className="h-11 w-11 rounded-xl object-cover" src={SalvinLogo} alt="Salvin logo" />
+            <img className="footer-logo rounded-xl object-cover" src={Salvinbg} alt="Salvin logo" />
             <strong className="text-xl font-black">Salvin ERP</strong>
           </div>
           <p className="mt-4 max-w-sm leading-7 text-slate-400">Modern ERP, CRM, dashboards, automation, and custom software for ambitious businesses.</p>

@@ -14,14 +14,25 @@
 }
 
 html {
+  width: 100%;
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  width: 100%;
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  overflow-x: clip;
+}
+
+img {
+  max-width: 100%;
 }
 
 button,
@@ -33,6 +44,29 @@ textarea {
 
 button {
   cursor: pointer;
+}
+
+p,
+h1,
+h2,
+h3,
+span,
+strong,
+button,
+a {
+  overflow-wrap: anywhere;
+}
+
+.site-logo {
+  display: block;
+  width: min(160px, 46vw);
+  height: 50px;
+  object-fit: contain;
+}
+
+.footer-logo {
+  width: min(140px, 44vw);
+  height: 50px;
 }
 
 .font800 {
@@ -91,6 +125,34 @@ button {
     linear-gradient(90deg, rgba(14, 165, 233, 0.08) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: linear-gradient(to bottom, #000, transparent 82%);
+}
+
+.hero-inner,
+.hero-copy,
+.hero-visual-wrap {
+  min-width: 0;
+}
+
+.hero-badge {
+  max-width: 100%;
+  flex-wrap: wrap;
+  line-height: 1.35;
+}
+
+.hero-title {
+  overflow-wrap: normal;
+}
+
+.hero-copy-text {
+  text-wrap: pretty;
+}
+
+.hero-actions {
+  max-width: 100%;
+}
+
+.hero-stats > * {
+  min-width: 0;
 }
 
 .glass-panel {
@@ -174,10 +236,21 @@ button {
 }
 
 .erp-hero-panel {
+  width: 100%;
   max-width: 580px;
   margin: 0 auto;
   border-radius: 2rem;
   padding: 1.5rem 1rem;
+}
+
+.home-hero-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 1rem;
+  border-radius: 1.35rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 .erp-panel-title {
@@ -370,12 +443,27 @@ button {
   text-align: center;
   text-transform: uppercase;
 }
+.section-eyebrowwhy {
+  margin-bottom: 0.85rem;
+  color: #94dbff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+}
 
 .section-title {
   color: #0f172a;
-  font-size: clamp(2rem, 4vw, 3.45rem);
+  font-size: clamp(2rem, 5vw, 2.45rem);
   font-weight: 900;
-  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-align: center;
+}
+.section-titlewhy {
+  color: #a3baf0;
+  font-size: clamp(2rem, 6vw, 3.45rem);
+  font-weight: 900;
   line-height: 1.05;
   text-align: center;
 }
@@ -387,6 +475,13 @@ button {
   font-size: 1.06rem;
   line-height: 1.8;
   text-align: center;
+}
+
+.section-eyebrow.text-left,
+.section-eyebrowwhy.text-left,
+.section-title.text-left,
+.section-titlewhy.text-left {
+  text-align: left;
 }
 
 .feature-card,
@@ -479,6 +574,13 @@ button {
   background:
     linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(3, 105, 161, 0.95)),
     linear-gradient(45deg, rgba(14, 165, 233, 0.22), transparent);
+}
+
+.why-choose-band {
+  background:
+    linear-gradient(135deg, rgba(28, 28, 28, 0.9), rgba(3, 105, 161, 0.72)),
+    linear-gradient(45deg, rgba(14, 165, 233, 0.18), transparent),
+    url("./assets/why-choose-bg.jpg") center / cover no-repeat;
 }
 
 .blue-band::after,
@@ -651,11 +753,22 @@ button {
 }
 
 .dashboard-shot {
+  display: flex;
+  flex-direction: column;
   min-height: 210px;
   padding: 1.1rem;
   background:
     linear-gradient(135deg, rgba(240, 249, 255, 0.95), rgba(238, 242, 255, 0.95)),
     linear-gradient(45deg, rgba(14, 165, 233, 0.12), transparent);
+}
+
+.dashboard-image {
+  width: 100%;
+  min-height: 156px;
+  flex: 1;
+  border-radius: 0.9rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 .contact-info {
@@ -776,6 +889,52 @@ button {
 }
 
 @media (max-width: 768px) {
+  .site-nav {
+    padding: 0.75rem;
+  }
+
+  .site-nav > div {
+    border-radius: 1rem;
+  }
+
+  .hero-section {
+    padding-top: 7.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-inner {
+    gap: 2rem;
+  }
+
+  .hero-copy,
+  .hero-copy-text {
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 3.25rem);
+    line-height: 1.08;
+  }
+
+  .hero-copy-text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    margin-top: 1.5rem;
+  }
+
+  .hero-stats {
+    margin-top: 1.5rem;
+  }
+
+  .hero-visual-wrap {
+    width: min(100%, 620px);
+    margin-inline: auto;
+  }
+
   .erp-modules-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -797,19 +956,139 @@ button {
   .section-title {
     font-size: clamp(1.9rem, 9vw, 2.7rem);
   }
+
+  .section-titlewhy {
+    font-size: clamp(2rem, 9vw, 2.9rem);
+  }
+
+  .section-copy {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .project-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .faq-item summary {
+    align-items: flex-start;
+  }
+
+  .faq-item summary svg {
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
+  }
 }
 
 @media (max-width: 560px) {
+  .site-logo {
+    width: min(132px, 48vw);
+    height: 44px;
+  }
+
+  .hero-section {
+    padding-inline: 0.9rem;
+    padding-top: 6.75rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .hero-grid {
+    background-size: 42px 42px;
+  }
+
+  .hero-inner {
+    gap: 1.5rem;
+  }
+
+  .hero-badge {
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.82rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 10vw, 2.7rem);
+  }
+
+  .hero-copy-text {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+
+  .hero-stats .glass-panel {
+    border-radius: 0.95rem;
+    padding: 0.8rem 0.65rem;
+  }
+
+  .hero-stats strong {
+    font-size: 1.35rem;
+  }
+
+  .hero-stats span {
+    font-size: 0.76rem;
+    line-height: 1.25;
+  }
+
   .erp-hero-panel {
+    border-radius: 1.25rem;
     padding: 1rem;
   }
 
+  .home-hero-image {
+    border-radius: 1rem;
+  }
+
   .erp-modules-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
   }
 
   .erp-module-card {
     min-height: auto;
+    border-radius: 0.85rem;
+    padding: 0.75rem 0.65rem;
+  }
+
+  .erp-module-name {
+    font-size: 0.74rem;
+  }
+
+  .erp-module-sub {
+    display: none;
+  }
+
+  .erp-detail-box {
+    min-height: auto;
+    border-radius: 0.9rem;
+    padding: 0.9rem;
+  }
+
+  .erp-detail-desc {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .erp-flow-bar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    overflow: visible;
+  }
+
+  .erp-flow-step {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 128px;
+    white-space: normal;
+  }
+
+  .erp-flow-arrow {
+    display: none;
   }
 
   .primary-btn,
@@ -818,12 +1097,144 @@ button {
     width: 100%;
   }
 
-  .hero-section {
-    padding-top: 8rem;
+  .page-hero {
+    padding-top: 7.25rem;
+    padding-bottom: 3rem;
   }
 
   .glass-panel {
     box-shadow: 0 16px 42px rgba(15, 23, 42, 0.1);
+  }
+
+  .float-badge {
+    width: 100%;
+  }
+
+  .section-space {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .section-eyebrow,
+  .section-eyebrowwhy,
+  .footer-title {
+    letter-spacing: 0.1em;
+  }
+
+  .feature-card,
+  .service-card,
+  .module-card,
+  .process-card,
+  .testimonial-card,
+  .result-card {
+    border-radius: 1rem;
+    padding: 1.15rem;
+  }
+
+  .industry-pill,
+  .reason-row,
+  .contact-info {
+    border-radius: 1rem;
+  }
+
+  .industry-pill {
+    min-height: auto;
+  }
+
+  .contact-info {
+    align-items: flex-start;
+  }
+
+  .contact-info svg {
+    flex: 0 0 auto;
+  }
+
+  .success-state {
+    min-height: 320px;
+  }
+
+  .success-state h3 {
+    font-size: 1.6rem;
+  }
+
+  .blue-band::after,
+  .cta-band::after {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-nav {
+    padding: 0.55rem;
+  }
+
+  .site-logo {
+    width: min(116px, 45vw);
+    height: 40px;
+  }
+
+  .hero-section {
+    padding-top: 6.25rem;
+  }
+
+  .hero-badge {
+    font-size: 0.78rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.85rem, 10vw, 2.25rem);
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats .glass-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    text-align: left;
+  }
+
+  .primary-btn,
+  .secondary-btn,
+  .outline-btn {
+    min-height: 46px;
+    padding: 0.78rem 1rem;
+    font-size: 0.94rem;
+  }
+
+  .erp-flow-bar {
+    padding: 0.65rem;
+  }
+
+  .erp-flow-step {
+    flex-basis: 100%;
+    min-width: 0;
+  }
+
+  .erp-detail-header {
+    align-items: flex-start;
+  }
+
+  .bar-row {
+    gap: 0.45rem;
+  }
+
+  .tech-chip {
+    width: 100%;
+    text-align: center;
+  }
+
+  .social-row a {
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer-logo {
+    width: 118px;
+    height: 44px;
   }
 }
 
