@@ -27,10 +27,9 @@ jobs:
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ftp.app.kgcpl.com
-          username: u757980258.salvinit
+          server: ftp.kmgprojects.in
+          username: ITsalvin
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./dist/
-          # server-dir: /home/u757980258/domains/app.kgcpl.com/public_html/
           server-dir: ./
