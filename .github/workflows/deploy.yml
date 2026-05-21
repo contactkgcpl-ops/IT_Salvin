@@ -28,7 +28,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ftp.kmgprojects.in
-          username: ITsalvin
+          username: u757980258.kmgprojects.in
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./dist/
