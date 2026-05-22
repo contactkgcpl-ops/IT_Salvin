@@ -4,34 +4,43 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Deploy environment
+        required: false
+        default: production
 
 jobs:
-  deploy:
+  build-deploy:
+    name: Build and deploy
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'production' }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Build React app
+      - name: Build project
         run: npm run build
 
-      - name: Deploy to Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      - name: Deploy to Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp.kmgprojects.in
-          username: u757980258.kmgprojects.in
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
           protocol: ftp
+          port: 21
           local-dir: ./dist/
           server-dir: ./
-          timeout: 60000
+          timeout: 900000
