@@ -33,7 +33,7 @@ const Footer = ({ navigate }) => (
         <p>
           info@salvinindustry.com
           <br />
-          +91 98000 00000
+          9898727796
           <br />
           Ahmedabad, Gujarat, India
         </p>

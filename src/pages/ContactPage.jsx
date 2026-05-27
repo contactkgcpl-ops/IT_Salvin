@@ -50,7 +50,7 @@ const ContactPage = ({ submitted, setSubmitted }) => (
               </div>
               <div className="form-row">
                 <FormField label="Email Address" placeholder="rajesh@company.com" type="email" />
-                <FormField label="Phone Number" placeholder="+91 98000 00000" type="tel" required={false} />
+                <FormField label="Phone Number" placeholder="9898727796" type="tel" required={false} />
               </div>
               <FormField label="Company / Organization" placeholder="Your company name" required={false} />
               <label className="form-group">

@@ -749,7 +749,7 @@ function ContactPage({ submitted, setSubmitted, navigate }) {
           <div className="grid content-start gap-4">
             {[
               [Mail, 'Email', 'hello@salvinerp.com'],
-              [Phone, 'Phone', '+91 98000 00000'],
+              [Phone, 'Phone', '9898727796'],
               [MapPin, 'Address', 'Salvin House, SG Highway, Ahmedabad, Gujarat 380054'],
               [Clock3, 'Business Hours', 'Mon-Sat, 9:30 AM - 6:30 PM IST'],
             ].map(([Icon, title, copy]) => (
@@ -787,7 +787,7 @@ function ContactPage({ submitted, setSubmitted, navigate }) {
                   <Field label="Work Email" placeholder="name@company.com" type="email" />
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Field label="Phone" placeholder="+91 98000 00000" type="tel" />
+                  <Field label="Phone" placeholder="9898727796" type="tel" />
                   <Field label="Company" placeholder="Company name" />
                 </div>
                 <label className="field">
@@ -877,7 +877,7 @@ function Footer({ navigate }) {
         <FooterCol title="Services" items={['ERP', 'CRM', 'Automation', 'Analytics']} />
         <div>
           <h3 className="footer-title">Contact</h3>
-          <p className="leading-7 text-slate-400">hello@salvinerp.com<br />+91 98000 00000<br />Ahmedabad, Gujarat</p>
+          <p className="leading-7 text-slate-400">hello@salvinerp.com<br />9898727796<br />Ahmedabad, Gujarat</p>
         </div>
       </div>
       <div className="mx-auto mt-10 flex max-w-7xl flex-wrap justify-between gap-4 border-t border-white/10 pt-6 text-sm text-slate-500">

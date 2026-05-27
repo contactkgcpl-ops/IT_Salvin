@@ -111,7 +111,7 @@ export const testimonials = [
 
 export const contactDetails = [
   ['Email Us', 'info@salvinindustry.com'],
-  ['Call Us', '+91 98000 00000'],
+  ['Call Us', '9898727796'],
   ['Our Office', 'Salvin House, SG Highway, Ahmedabad, Gujarat 380054'],
   ['Business Hours', 'Mon-Sat: 9:30 AM - 6:30 PM IST'],
 ]
